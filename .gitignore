@@ -1,59 +1,13 @@
-# Logs
-.pnpm-debug.log*
-*.log
-lerna-debug.log*
-logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Reports
-report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
-
-# Runtime
-*.pid
-*.pid.lock
-*.seed
-pids
-
-# Cache
-.cache
-.eslintcache
-.npm
-.parcel-cache
-.yarn-integrity
-*.tsbuildinfo
-node_modules/
-
-# Output of 'npm pack'
-*.tgz
-
-# dotenv environment variables file
-.env
-.env.production
-.env.test
-
-# yarn v2
-.pnp.*
-.yarn/build-state.yml
-.yarn/cache
-.yarn/install-state.gz
-.yarn/unplugged
-
-# OS generated files
-._*
-.AppleDouble
-.DS_Store
-.LSOverrideIcon
-.nfs*
-.Trash-*
-*~
-ehthumbs_vista.db
-ehthumbs.db
-Thumbs.db
-Thumbs.db:encryptable
-packages
-
-# TMP folder
+# Ignore the following directories
+log/*
+node_modules
+src/*
 tmp/*
-!tmp/.gitkeep
+
+# Ignore the following files
+*.log
+*.log.*
+tests/**/*.js
+
+# Keep the following files for empty directories to be included in the repository
+!/**/.gitkeep

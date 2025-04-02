@@ -2,7 +2,7 @@
   "version": "0.1.0",
   "name": "@idangoldman/stooge",
   "title": "Stooge",
-  "description": "A simple config formatter that converts between JSON, YAML, and INI.",
+  "description": "A simple config formatter that converts between JSON, YAML, TOML, and INI.",
   "author": "Idan Goldman",
   "license": "MIT",
   "homepage": "https://github.com/idangoldman/stooge/",
@@ -14,46 +14,48 @@
     "url": "https://github.com/idangoldman/stooge/issues"
   },
   "keywords": [
+    "config file",
     "config",
+    "configuration file",
+    "configuration",
     "converter",
+    "formatter",
     "ini",
     "json",
+    "parser",
+    "toml",
     "yaml",
     "yml"
   ],
   "engines": {
-    "node": "22.1.0",
-    "pnpm": "9.1.1"
+    "node": "22.5.1",
+    "pnpm": "9.9.0"
   },
   "type": "module",
-  "main": "./bin/index.js",
+  "main": "./src/api.js",
   "bin": {
-    "stooge": "./bin/index.js"
+    "stooge": "./bin/stooge.js"
   },
   "imports": {
-    "#root/*": "./*"
+    "#root/*": "./src/*",
+    "#tests/*": "./tests/*"
   },
   "scripts": {
-    "clear": "rm -frv node_modules pnpm-lock.yaml",
-    "help": "pnpm run prefix bin/index.js --help",
-    "prefix": "node --no-warnings --experimental-json-modules",
-    "publish": "pnpm publish --access public",
-    "reinstall": "pnpm run clear && pnpm install",
-    "start": "pnpm run prefix bin/index.js",
-    "test": "./node_modules/.bin/cucumber-js --config ./tests/cucumber.yml",
-    "upgrade": "pnpm update --lockfile-only"
+    "start": "plate run ./bin/stooge.js"
   },
   "dependencies": {
-    "ini": "^4.1.2",
-    "pino": "^9.1.0",
-    "pino-pretty": "^11.0.0",
-    "yaml": "^2.4.2",
-    "yargs": "^17.7.2",
-    "zx": "^8.1.0"
+    "ini": "5.0.0",
+    "pino-pretty": "11.2.2",
+    "pino": "9.4.0",
+    "yaml": "2.5.1",
+    "yargs": "17.7.2",
+    "zx": "8.1.5"
   },
   "devDependencies": {
-    "@cucumber/cucumber": "^10.7.0",
-    "@cucumber/pretty-formatter": "^1.0.1",
-    "rimraf": "^5.0.7"
-  }
+    "@cucumber/cucumber": "11.0.0",
+    "@cucumber/pretty-formatter": "1.0.1",
+    "plate": "file:../blah/plate",
+    "rimraf": "6.0.1"
+  },
+  "packageManager": "pnpm@9.9.0+sha512.60c18acd138bff695d339be6ad13f7e936eea6745660d4cc4a776d5247c540d0edee1a563695c183a66eb917ef88f2b4feb1fc25f32a7adcadc7aaf3438e99c1"
 }

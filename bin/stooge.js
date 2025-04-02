@@ -3,14 +3,14 @@
 // Examples of usage:
 // stooge -i tests/fixtures/fixture.yaml -o tests/tmp/yaml-to.json -f json
 
-import yargs from "yargs"
-import { hideBin } from "yargs/helpers"
+import yargs from "yargs";
+import { hideBin } from "yargs/helpers";
 
 import {
   SUPPORTED_EXTENSIONS,
   SUPPORTED_EXTENSIONS_LIST,
-} from "#root/library/supported.js";
-import { performConversion } from "#root/library/conversion.js";
+} from "#root/supported.js";
+import { performConversion } from "#root/conversion.js";
 
 const argv = yargs(hideBin(process.argv))
   .usage("Usage: stooge --input <input> --output <output> --format <format>")
@@ -28,9 +28,9 @@ const argv = yargs(hideBin(process.argv))
   .option("format", {
     alias: ["f", "format"],
     choices: SUPPORTED_EXTENSIONS,
-    default: "yml",
-    describe: `Format seting of the output file, supported formats: ${SUPPORTED_EXTENSIONS_LIST}.`,
     coerce: (value) => value.toLowerCase(),
+    default: "yml",
+    describe: `Format settings of the output file, supported formats: ${SUPPORTED_EXTENSIONS_LIST}.`,
     type: "string",
   }).argv;
 
