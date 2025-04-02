@@ -28,15 +28,17 @@ export SUPPORTED_EXTENSIONS = FORMATS.flat()
 export SUPPORTED_EXTENSIONS_LIST = SUPPORTED_EXTENSIONS.join(",")
 
 export getFileFormatFromFilePath = (filePath = "") ->
+  selectedFormat = ""
   extension = extname(filePath)?.replace(".", "").toLowerCase()
 
-  throw new Error("File #{filePath} does not have an extension.") unless extension
+  if extension.isEmpty()
+    throw new Error "File #{filePath} does not have an extension."
 
-  throw new Error("File #{filePath} has an unsupported extension.") unless SUPPORTED_EXTENSIONS.includes extension
+  if SUPPORTED_EXTENSIONS.excludes extension
+    throw new Error "File #{filePath} has an unsupported extension."
 
-  selectedFormat = ""
   for format in FORMATS
-    if Array.isArray(format) and format.includes extension
+    if format.isArray() and format.includes extension
       selectedFormat = format[0]
       break
 
@@ -44,6 +46,7 @@ export getFileFormatFromFilePath = (filePath = "") ->
       selectedFormat = format
       break
 
-  throw new Error("File #{filePath} has an unknown extension.") unless selectedFormat.length
+  if selectedFormat.isEmpty()
+    throw new Error "File #{filePath} has an unknown extension."
 
   selectedFormat

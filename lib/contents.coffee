@@ -2,14 +2,13 @@ import { access, constants, readFile, writeFile } from "node:fs/promises"
 import { resolve, extname } from "node:path"
 
 import { safeCallback } from "#root/safe-execution.js"
-import { SUPPORTED_EXTENSIONS, SUPPORTED_EXTENSIONS_LIST } from "#root/supported.js"
+import { SUPPORTED_EXTENSIONS } from "#root/supported.js"
 
 export read = (filePath = "") ->
   [error, result] = await safeCallback ->
     absoluteFilePath = resolve filePath
 
     await access absoluteFilePath, constants.F_OK | constants.R_OK
-
     await readFile absoluteFilePath, "utf-8"
 
   throw new Error(error) if error
@@ -29,8 +28,11 @@ export write = (filePath = "", contents = "") ->
   result
 
 export extension = (filePath = "") ->
-  fileExtension = extname(filePath).replace(".", "").toLowerCase()
+  fileExtension = extname filePath
+                    .replace ".", ""
+                    .toLowerCase()
 
-  throw new Error("File \"#{filePath}\" has an unsupported extension, supported extensions: #{SUPPORTED_EXTENSIONS_LIST}.") unless SUPPORTED_EXTENSIONS.includes fileExtension
+  unless SUPPORTED_EXTENSIONS.includes fileExtension
+    throw new Error "File \"#{filePath}\" has an unsupported extension."
 
   fileExtension
